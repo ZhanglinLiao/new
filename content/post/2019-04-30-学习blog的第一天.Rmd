@@ -1,0 +1,11 @@
+---
+title: 学习blog的第一天
+author: 廖长霖
+date: '2019-04-30'
+slug: 学习blog的第一天
+categories:
+  - R
+tags: []
+---
+学习R的第一天
+又是什么都不会的一天 end。

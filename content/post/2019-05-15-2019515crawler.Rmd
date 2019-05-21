@@ -1,0 +1,42 @@
+---
+title: 2019515crawler
+author: lzl
+date: '2019-05-15'
+slug: 2019515爬虫
+categories:
+  - R
+tags: []
+---
+爬取政府报告2019
+http://www.gov.cn/guowuyuan/2019-03/16/content_5374314.htm
+```{r}
+x<-1:10
+y<-31:40
+plot(x,y)
+```
+
+```{r}
+library(rvest)
+url<-'http://www.gov.cn/guowuyuan/2019-03/16/content_5374314.htm'
+web<-read_html(url,encoding="utf-8") #读取数据,规定编码
+position<-web %>% html_nodes("div.pages_content") %>% html_text()
+print(position)
+```
+```{r}
+library(jiebaR) #加载包
+engine_s<-worker(stop_word = "D:\\rstudio\\myblog\\stopwords.txt")#初始化分词引擎并加载停用词。  
+seg<-segment(position,engine_s)#分词  
+f<-freq(seg) #统计词频  
+f<-f[order(f[2],decreasing=TRUE),] #根据词频降序排列 
+```
+```{r}
+library(wordcloud2)#加载包
+f2<-f[1:150,]     #总共有2000多个词，为了显示效果，我只提取前150个字
+wordcloud2(f2, size = 0.8 ,shape='star')    #形状设置为一颗五角星
+```
+
+
+
+
+
+

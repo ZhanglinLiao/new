@@ -8,6 +8,7 @@ categories:
 tags: []
 ---
 爬取政府报告2019
+诶？为什么这个停用词表没起作用？？！！
 http://www.gov.cn/guowuyuan/2019-03/16/content_5374314.htm
 ```{r}
 x<-1:10
@@ -27,7 +28,7 @@ library(jiebaR) #加载包
 engine_s<-worker(stop_word = "D:\\rstudio\\myblog\\stopwords.txt")#初始化分词引擎并加载停用词。  
 seg<-segment(position,engine_s)#分词  
 f<-freq(seg) #统计词频  
-f<-f[order(f[2],decreasing=TRUE),] #根据词频降序排列 
+f<-f[order(f[2],decreasing=TRUE),] #根据词频降序排列
 ```
 ```{r}
 library(wordcloud2)#加载包

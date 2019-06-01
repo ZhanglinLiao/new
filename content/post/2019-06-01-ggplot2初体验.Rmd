@@ -1,8 +1,8 @@
 ---
-title: Ggplot2 first experience
+title: ggplot2初体验
 author: 廖长霖
 date: '2019-06-01'
-slug: ggplot2-first-experience
+slug: ggplot2初体验
 categories:
   - R
 tags: []
@@ -18,7 +18,9 @@ df <- data.frame(Tear = Year,score = score)
 ggplot(df,aes(x = Year,y = score,group = 1))+
     geom_line()+xlab("Year")+geom_point(size=4, shape=20)
 ```
-然后再来对比一下2016-2018年厦门大学和四川大学在广西文科招生的最低分数线吧！
+
+
+然后再来对比看一下2016-2018年厦门大学和四川大学在广西文科招生的最低分数线吧
 ```{r}
 school=c("XMU","XMU","XMU","SCU","SCU","SCU")
 year=c(2016,2017,2018)
@@ -26,4 +28,3 @@ score=c(614,620,627,612,611,623)
 tgg=data.frame(school,year,score)
 ggplot(tgg, aes(x=factor(year), y=score, colour=school,group=school)) + geom_line(size=2)+geom_point(size=4, shape=20)
 ```
-

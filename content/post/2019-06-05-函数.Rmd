@@ -1,0 +1,19 @@
+---
+title: 函数
+author: 廖长霖
+date: '2019-06-05'
+slug: 函数
+categories:
+  - R
+tags: []
+---
+来到川大的第一天就看到校园里各种120周年校庆的宣传，那么今天距离川大诞生多少天了呢？
+```{r}
+today <- Sys.Date()
+
+gtd <- as.Date("1896-09-29")   
+
+difftime(today,gtd,units-"days")
+
+```
+原来今天已经距离川大诞生44808天啦！

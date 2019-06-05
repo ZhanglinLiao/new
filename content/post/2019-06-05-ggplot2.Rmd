@@ -1,0 +1,30 @@
+---
+title: 'ggplot2 '
+author: 廖长霖
+date: '2019-06-05'
+slug: ggplot2
+categories:
+  - R
+tags: []
+---
+上一节课学了怎么用ggplot2作图，现在来实践一下吧！统计四川大学2014年至2018年在广西文科招生的最低分数线，如图所示：
+```{r}
+library(ggplot2)
+library(lubridate) 
+Year <- year(seq(from = as.Date("2014-01-01"),to = as.Date("2018-01-01"),by = "year"))
+score <- c(609,599,612,611,623)
+df <- data.frame(Tear = Year,score = score)
+
+ggplot(df,aes(x = Year,y = score,group = 1))+
+    geom_line()+xlab("Year")+geom_point(size=4, shape=20)
+```
+
+
+然后再来对比看一下2016-2018年厦门大学和四川大学在广西文科招生的最低分数线吧
+```{r}
+school=c("XMU","XMU","XMU","SCU","SCU","SCU")
+year=c(2016,2017,2018)
+score=c(614,620,627,612,611,623)
+tgg=data.frame(school,year,score)
+ggplot(tgg, aes(x=factor(year), y=score, colour=school,group=school)) + geom_line(size=2)+geom_point(size=4, shape=20)
+```

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.4" />
+
+
+<title>ggplot2  - liao&#39;s website</title>
+<meta property="og:title" content="ggplot2  - liao&#39;s website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/im.jpg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/ZhanglinLiao">GitHub</a></li>
+    
+    <li><a href="http://www.scu.edu.cn/">SCU</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">ggplot2 </h1>
+
+    
+    <span class="article-date">2019-06-05</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>上一节课学了怎么用ggplot2作图，现在来实践一下吧！统计四川大学2014年至2018年在广西文科招生的最低分数线，如图所示：</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang</code></pre>
+<pre class="r"><code>library(lubridate) </code></pre>
+<pre><code>## 
+## 载入程辑包：&#39;lubridate&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     date</code></pre>
+<pre class="r"><code>Year &lt;- year(seq(from = as.Date(&quot;2014-01-01&quot;),to = as.Date(&quot;2018-01-01&quot;),by = &quot;year&quot;))
+score &lt;- c(609,599,612,611,623)
+df &lt;- data.frame(Tear = Year,score = score)
+
+ggplot(df,aes(x = Year,y = score,group = 1))+
+    geom_line()+xlab(&quot;Year&quot;)+geom_point(size=4, shape=20)</code></pre>
+<p><img src="/post/2019-06-05-ggplot2_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>然后再来对比看一下2016-2018年厦门大学和四川大学在广西文科招生的最低分数线吧</p>
+<pre class="r"><code>school=c(&quot;XMU&quot;,&quot;XMU&quot;,&quot;XMU&quot;,&quot;SCU&quot;,&quot;SCU&quot;,&quot;SCU&quot;)
+year=c(2016,2017,2018)
+score=c(614,620,627,612,611,623)
+tgg=data.frame(school,year,score)
+ggplot(tgg, aes(x=factor(year), y=score, colour=school,group=school)) + geom_line(size=2)+geom_point(size=4, shape=20)</code></pre>
+<p><img src="/post/2019-06-05-ggplot2_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

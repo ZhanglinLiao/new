@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.55.4" />
 
 
-<title>记第一次爬政府报告 - liao&#39;s website</title>
-<meta property="og:title" content="记第一次爬政府报告 - liao&#39;s website">
+<title>函数 - liao&#39;s website</title>
+<meta property="og:title" content="函数 - liao&#39;s website">
 
 
   <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -19,6 +19,11 @@
 
 
 
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
 
 
 
@@ -60,17 +65,24 @@
     <span class="article-duration">1 min read</span>
     
 
-    <h1 class="article-title">记第一次爬政府报告</h1>
+    <h1 class="article-title">函数</h1>
 
     
-    <span class="article-date">2019-05-20</span>
+    <span class="article-date">2019-06-05</span>
     
 
     <div class="article-content">
       
 
 
-<p>这是我第一次爬政府报告的记录。尽管大部分步骤都有现成的例子可以参考，但是就是这么如此，还是遇到了很多问题，一直显示的error无法找到停用词表折磨了我许久，哪怕到了最后解决了这一问题，最终的显示结果似乎停用词表还是没有发挥它的作用，停用词表还真是跟我杠上了！就先这样吧，晚上再试试看做一个不需要用到停用词表的爬虫。</p>
+<p>来到川大的第一天就看到校园里各种120周年校庆的宣传，那么今天距离川大诞生多少天了呢？</p>
+<pre class="r"><code>today &lt;- Sys.Date()
+
+gtd &lt;- as.Date(&quot;1896-09-29&quot;)   
+
+difftime(today,gtd,units-&quot;days&quot;)</code></pre>
+<pre><code>## Time difference of 44808 days</code></pre>
+<p>原来今天已经距离川大诞生44808天啦！</p>
 
     </div>
   </article>
@@ -93,6 +105,18 @@
 
     </div>
     
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
     
 

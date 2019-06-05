@@ -9,8 +9,7 @@ tags: []
 ---
 爬取政府报告2019
 <<<<<<< HEAD
-诶？为什么这个停用词表没作用？为什么这个还是0001！
-=======
+诶？为什么这个停用词表没作用？为什么这个还是0001
 >>>>>>> f37e96ca11785efd0d2f359ba657dd278c76093b
 http://www.gov.cn/guowuyuan/2019-03/16/content_5374314.htm
 ```{r}
@@ -36,9 +35,8 @@ f<-f[order(f[2],decreasing=TRUE),] #根据词频降序排列
 ```{r}
 library(wordcloud2)#加载包
 f2<-f[1:150,]     #总共有2000多个词，为了显示效果，我只提取前150个字
-<<<<<<< HEAD
+
 wordcloud2(f2, size = 0.8 ,shape='ovalr')    #形状设置为椭圆
-=======
-wordcloud2(f2, size = 0.8 ,shape='oval')    #形状设置为一颗椭圆
->>>>>>> 5d87d173c009ba1e20e549b396db8289dfac50f4
+
 ```
+

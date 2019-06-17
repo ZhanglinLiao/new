@@ -6,10 +6,19 @@
     <description>Recent content in Posts on liao&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Crawler Three kingdoms and ggplot2</title>
+      <link>/2019/06/17/crawler-three-kingdoms-and-ggplot2/</link>
+      <pubDate>Mon, 17 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/06/17/crawler-three-kingdoms-and-ggplot2/</guid>
+      <description>getwd()## [1] &amp;quot;D:/rstudio/myblog/content/post&amp;quot;setwd(&amp;quot;D:\\三国演义&amp;quot;)library(jiebaR)## 载入需要的程辑包：jiebaRDlibrary(ggplot2)## Registered S3 methods overwritten by &amp;#39;ggplot2&amp;#39;:## method from ## [.quosures rlang## c.quosures rlang## print.quosures rlanglibrary(jpeg)library(reshape2)library(wordcloud)## 载入需要的程辑包：RColorBrewersanguo &amp;lt;- readLines(&amp;quot;D:\\三国演义\\三国.txt&amp;quot;)## Warning in readLines(&amp;quot;D:\\三国演义\\三国.txt&amp;quot;): 读&amp;#39;D:\涓夊浗婕斾箟\涓夊## 浗.txt&amp;#39;时最后一行未遂sanguo[1:10]## [1] &amp;quot;&amp;quot; ## [2] &amp;quot;三国演义&amp;quot; ## [3] &amp;quot;作者：罗贯中&amp;quot; ## [4] &amp;quot;正文 第一回 宴桃园豪杰三结义 斩黄巾英雄首立功&amp;quot; ## [5] &amp;quot;&amp;quot; ## [6] &amp;quot;滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。&amp;quot; ## [7] &amp;quot;　青山依旧在，几度夕阳红。　白发渔樵江渚上，惯&amp;quot; ## [8] &amp;quot;　看秋月春风。一壶浊酒喜相逢。古今多少事，都付&amp;quot; ## [9] &amp;quot;　笑谈中。&amp;quot; ## [10] &amp;quot;　——调寄《临江仙》&amp;quot;dictpath &amp;lt;- &amp;quot;stopwords.</description>
+    </item>
     
     <item>
       <title>ggplot2 </title>

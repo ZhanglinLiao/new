@@ -1,0 +1,60 @@
+---
+title: Crawler Three kingdoms and ggplot2
+author: lzl
+date: '2019-06-17'
+slug: crawler-three-kingdoms-and-ggplot2
+categories:
+  - R
+tags: []
+---
+```{r}
+getwd()
+setwd("D:\\三国演义")
+library(jiebaR)
+library(ggplot2)
+library(jpeg)
+library(reshape2)
+library(wordcloud)
+sanguo <- readLines("D:\\三国演义\\三国.txt")
+sanguo[1:10]
+```
+
+
+```{r}
+dictpath <- "stopwords.txt"
+cutter <- worker(user="D:/三国演义/stopwords.txt", bylines = TRUE, stop_word="D:/三国演义/stopwords.txt")
+```
+```{r}
+res <- cutter[sanguo] 
+ head(res)
+```
+```{r}
+text <- unlist(res)
+freq <- data.frame(table(text))
+freq <- freq[nchar(as.character(freq$text))>=2,]
+freq <- freq[order(-freq$Freq),]
+str(freq)
+head(freq)
+```
+
+
+
+
+```{r}
+roles <- c("曹操|孟德|阿瞒","刘备|玄德|刘玄德","孔明|诸葛亮|卧龙|诸葛孔明","关公|关羽|云长|关云长|长生","吕布|奉先|飞将军","翼德|张飞") 
+role_name = c("曹操","刘备","孔明","关公", "吕布","张飞")
+role_paras = sapply(roles, grepl, text) 
+colnames(role_paras) = role_name 
+role_counts = data.frame(role = factor(colnames(role_paras), 
+                                       levels = c("曹操","刘备","孔明","关公", "吕布","张飞")), 
+                         count = colSums(role_paras)) 
+
+library(ggplot2)  
+ggplot(role_counts, aes(x = role, y = count, fill = role)) + 
+  geom_bar(stat = "identity", width = 0.75) + 
+  xlab("人物")+
+  ylab("频数")
+
+```
+
+从主要人物的词频分析以及图标都直观的反映了罗贯中对魏蜀吴的倾向显然是蜀国，运用爬虫进行名著的文本分析能印证一些观点还能发现一些过去没有注意到的细节。

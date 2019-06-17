@@ -1,0 +1,99 @@
+---
+title: Crawler Three kingdoms and ggplot2
+author: lzl
+date: '2019-06-17'
+slug: crawler-three-kingdoms-and-ggplot2
+categories:
+  - R
+tags: []
+---
+
+
+
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>## [1] &quot;D:/rstudio/myblog/content/post&quot;</code></pre>
+<pre class="r"><code>setwd(&quot;D:\\三国演义&quot;)
+library(jiebaR)</code></pre>
+<pre><code>## 载入需要的程辑包：jiebaRD</code></pre>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang</code></pre>
+<pre class="r"><code>library(jpeg)
+library(reshape2)
+library(wordcloud)</code></pre>
+<pre><code>## 载入需要的程辑包：RColorBrewer</code></pre>
+<pre class="r"><code>sanguo &lt;- readLines(&quot;D:\\三国演义\\三国.txt&quot;)</code></pre>
+<pre><code>## Warning in readLines(&quot;D:\\三国演义\\三国.txt&quot;): 读&#39;D:\涓夊浗婕斾箟\涓夊
+## 浗.txt&#39;时最后一行未遂</code></pre>
+<pre class="r"><code>sanguo[1:10]</code></pre>
+<pre><code>##  [1] &quot;&quot;                                                        
+##  [2] &quot;三国演义&quot;                                                
+##  [3] &quot;作者：罗贯中&quot;                                            
+##  [4] &quot;正文 第一回 宴桃园豪杰三结义 斩黄巾英雄首立功&quot;           
+##  [5] &quot;&quot;                                                        
+##  [6] &quot;滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。&quot;          
+##  [7] &quot;　　青山依旧在，几度夕阳红。　　白发渔樵江渚上，惯&quot;      
+##  [8] &quot;　　看秋月春风。一壶浊酒喜相逢。古今多少事，都付&quot;        
+##  [9] &quot;　　笑谈中。&quot;                                            
+## [10] &quot;　　　　　　　　　　　　　　　　　　　　——调寄《临江仙》&quot;</code></pre>
+<pre class="r"><code>dictpath &lt;- &quot;stopwords.txt&quot;
+cutter &lt;- worker(user=&quot;D:/三国演义/stopwords.txt&quot;, bylines = TRUE, stop_word=&quot;D:/三国演义/stopwords.txt&quot;)</code></pre>
+<pre><code>## Encoding of stop words file:  gb2312</code></pre>
+<pre><code>## Warning in worker(user = &quot;D:/三国演义/stopwords.txt&quot;, bylines = TRUE,
+## stop_word = &quot;D:/三国演义/stopwords.txt&quot;): stop words file should be UTF-8
+## encoding.</code></pre>
+<pre class="r"><code>res &lt;- cutter[sanguo] 
+ head(res)</code></pre>
+<pre><code>## [[1]]
+## character(0)
+## 
+## [[2]]
+## [1] &quot;三国演义&quot;
+## 
+## [[3]]
+## [1] &quot;作者&quot;   &quot;罗贯中&quot;
+## 
+## [[4]]
+##  [1] &quot;正文&quot;   &quot;第一回&quot; &quot;宴&quot;     &quot;桃园&quot;   &quot;豪杰&quot;   &quot;三&quot;     &quot;结义&quot;  
+##  [8] &quot;斩&quot;     &quot;黄巾&quot;   &quot;英雄&quot;   &quot;首&quot;     &quot;立功&quot;  
+## 
+## [[5]]
+## character(0)
+## 
+## [[6]]
+##  [1] &quot;滚滚&quot;     &quot;长江&quot;     &quot;东&quot;       &quot;逝水&quot;     &quot;浪花&quot;     &quot;淘尽&quot;    
+##  [7] &quot;英雄&quot;     &quot;是非成败&quot; &quot;转头&quot;     &quot;空&quot;</code></pre>
+<pre class="r"><code>text &lt;- unlist(res)
+freq &lt;- data.frame(table(text))
+freq &lt;- freq[nchar(as.character(freq$text))&gt;=2,]
+freq &lt;- freq[order(-freq$Freq),]
+str(freq)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    43389 obs. of  2 variables:
+##  $ text: Factor w/ 46510 levels &quot;　&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 3497 18334 15314 25789 11535 4475 8379 2570 37002 16716 ...
+##  $ Freq: int  929 831 759 647 509 488 463 435 432 420 ...</code></pre>
+<pre class="r"><code>head(freq)</code></pre>
+<pre><code>##       text Freq
+## 3497  曹操  929
+## 18334 孔明  831
+## 15314 将军  759
+## 25789 却说  647
+## 11535 关公  509
+## 4475  丞相  488</code></pre>
+<pre class="r"><code>roles &lt;- c(&quot;曹操|孟德|阿瞒&quot;,&quot;刘备|玄德|刘玄德&quot;,&quot;孔明|诸葛亮|卧龙|诸葛孔明&quot;,&quot;关公|关羽|云长|关云长|长生&quot;,&quot;吕布|奉先|飞将军&quot;,&quot;翼德|张飞&quot;) 
+role_name = c(&quot;曹操&quot;,&quot;刘备&quot;,&quot;孔明&quot;,&quot;关公&quot;, &quot;吕布&quot;,&quot;张飞&quot;)
+role_paras = sapply(roles, grepl, text) 
+colnames(role_paras) = role_name 
+role_counts = data.frame(role = factor(colnames(role_paras), 
+                                       levels = c(&quot;曹操&quot;,&quot;刘备&quot;,&quot;孔明&quot;,&quot;关公&quot;, &quot;吕布&quot;,&quot;张飞&quot;)), 
+                         count = colSums(role_paras)) 
+
+library(ggplot2)  
+ggplot(role_counts, aes(x = role, y = count, fill = role)) + 
+  geom_bar(stat = &quot;identity&quot;, width = 0.75) + 
+  xlab(&quot;人物&quot;)+
+  ylab(&quot;频数&quot;)</code></pre>
+<p><img src="/post/2019-06-17-crawler-three-kingdoms-and-ggplot2_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>从主要人物的词频分析以及图标都直观的反映了罗贯中对魏蜀吴的倾向显然是蜀国，运用爬虫进行名著的文本分析能印证一些观点还能发现一些过去没有注意到的细节。</p>
